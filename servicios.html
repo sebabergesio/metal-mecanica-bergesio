@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Mecánica Bergesio · Servicios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0c0f15;
+            color: #f0f4ff;
+            overflow-x: hidden;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0b1120, #1a1f2e, #0f1a2b);
+            background-size: 400% 400%;
+            animation: gradientFlow 18s ease infinite;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(0, 180, 255, 0.1);
+            animation: floatParticle linear infinite alternate;
+        }
+        .particle:nth-child(1) { width: 180px; height: 180px; top: 5%; left: 2%; animation-duration: 22s; }
+        .particle:nth-child(2) { width: 250px; height: 250px; bottom: 8%; right: 3%; animation-duration: 28s; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 120px; height: 120px; top: 25%; right: 15%; animation-duration: 18s; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 300px; height: 300px; bottom: 30%; left: -5%; animation-duration: 32s; animation-delay: 0.5s; }
+        .particle:nth-child(5) { width: 140px; height: 140px; top: 70%; left: 20%; animation-duration: 20s; animation-delay: 3s; }
+        .particle:nth-child(6) { width: 200px; height: 200px; top: 10%; left: 60%; animation-duration: 26s; animation-delay: 1.5s; }
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.4; }
+            25% { transform: translate(40px, -30px) scale(1.2) rotate(5deg); opacity: 0.7; }
+            50% { transform: translate(-20px, 50px) scale(0.9) rotate(-3deg); opacity: 0.5; }
+            75% { transform: translate(30px, 20px) scale(1.1) rotate(4deg); opacity: 0.8; }
+            100% { transform: translate(-40px, -40px) scale(1) rotate(0deg); opacity: 0.4; }
+        }
+        .content {
+            position: relative;
+            z-index: 5;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.8rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            margin-bottom: 4rem;
+            animation: slideDown 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.3s ease;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        .header:hover {
+            border-color: rgba(0, 180, 255, 0.3);
+            box-shadow: 0 20px 45px rgba(0, 100, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+        }
+        .logo a {
+            color: #f0f4ff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo .logo-icon {
+            color: #3b9eff;
+            font-size: 2rem;
+            animation: pulseIcon 2.4s ease-in-out infinite;
+        }
+        @keyframes pulseIcon {
+            0% { transform: scale(1) rotate(0deg); text-shadow: 0 0 0 #3b9eff; }
+            50% { transform: scale(1.2) rotate(8deg); text-shadow: 0 0 20px #3b9eff; }
+            100% { transform: scale(1) rotate(0deg); text-shadow: 0 0 0 #3b9eff; }
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: #b0c7e7;
+            text-decoration: none;
+            transition: 0.25s;
+            position: relative;
+            padding: 0.3rem 0;
+        }
+        .nav-links a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #3b9eff;
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a.active {
+            color: #fff;
+        }
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent;
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            background: #3b9eff;
+            border-color: #3b9eff;
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(59, 158, 255, 0.3);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0f4ff, #8bb4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: #94a9d1;
+            font-size: 1.2rem;
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        .portfolio-filters button {
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a9d1;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .portfolio-filters button:hover {
+            border-color: rgba(59, 158, 255, 0.3);
+            color: #f0f4ff;
+        }
+        .portfolio-filters button.active {
+            background: rgba(59, 158, 255, 0.15);
+            border-color: #3b9eff;
+            color: #f0f4ff;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .portfolio-item {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(59, 158, 255, 0.25);
+            box-shadow: 0 30px 60px rgba(0, 40, 100, 0.3);
+        }
+        .portfolio-item .media-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .portfolio-item .media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .portfolio-item:hover .media-container img {
+            transform: scale(1.05);
+        }
+        .portfolio-item .media-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .portfolio-item .media-container .placeholder-media {
+            font-size: 4rem;
+            opacity: 0.5;
+        }
+        .portfolio-item .info {
+            padding: 1.5rem;
+        }
+        .portfolio-item .info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        .portfolio-item .info .tag {
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(59, 158, 255, 0.1);
+            color: #3b9eff;
+            border: 1px solid rgba(59, 158, 255, 0.15);
+            margin-bottom: 0.5rem;
+        }
+        .portfolio-item .info p {
+            color: #94a9d1;
+            font-size: 0.9rem;
+        }
+        .portfolio-item .info .btn-demo {
+            margin-top: 1rem;
+            padding: 0.4rem 1.5rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: transparent;
+            color: #b0c7e7;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+        }
+        .portfolio-item .info .btn-demo:hover {
+            background: rgba(59, 158, 255, 0.15);
+            border-color: #3b9eff;
+            color: #fff;
+        }
+
+        /* ===== MODAL PARA VER TRABAJO ===== */
+        .modal-trabajo-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-trabajo-overlay.active {
+            display: flex;
+        }
+        .modal-trabajo-content {
+            background: #0f0f0f;
+            border-radius: 16px;
+            border: 1px solid #2a2a2a;
+            max-width: 800px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+        .modal-trabajo-content .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #6a80aa;
+            cursor: pointer;
+            transition: 0.3s;
+            background: none;
+            border: none;
+        }
+        .modal-trabajo-content .close-modal:hover {
+            color: #f0f4ff;
+            transform: rotate(90deg);
+        }
+        .modal-trabajo-content h2 {
+            color: #f0f4ff;
+            margin-bottom: 10px;
+            padding-right: 40px;
+        }
+        .modal-trabajo-content .modal-tag {
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(59, 158, 255, 0.1);
+            color: #3b9eff;
+            border: 1px solid rgba(59, 158, 255, 0.15);
+            margin-bottom: 15px;
+        }
+        .modal-trabajo-content .modal-media {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: #1a1a1a;
+            max-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-trabajo-content .modal-media img,
+        .modal-trabajo-content .modal-media video {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+        .modal-trabajo-content .modal-desc {
+            color: #94a9d1;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            color: #6a80aa;
+            font-size: 0.9rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+        .footer-social a {
+            color: #6a80aa;
+            text-decoration: none;
+            transition: 0.25s;
+            margin-left: 1.2rem;
+        }
+        .footer-social a:hover { color: #f0f4ff; }
+        .footer-social i { font-size: 1.4rem; transition: 0.25s; }
+        .footer-social a:hover i {
+            color: #f0f4ff;
+            transform: translateY(-4px) scale(1.1);
+            text-shadow: 0 0 15px #3b9eff;
+        }
+
+        @media (max-width: 800px) {
+            .header { flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+            .nav-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+            .page-header h1 { font-size: 2.2rem; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .modal-trabajo-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animated"></div>
+    <div class="particles-container">
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <div class="content" id="appContent">
+        <div style="text-align:center; padding:50px; color:#4a5a7a;">
+            <i class="fas fa-spinner fa-spin" style="font-size:3rem;"></i>
+            <p style="margin-top:15px;">Cargando datos...</p>
+        </div>
+    </div>
+
+    <!-- MODAL PARA VER TRABAJO -->
+    <div class="modal-trabajo-overlay" id="modalTrabajo">
+        <div class="modal-trabajo-content">
+            <button class="close-modal" onclick="cerrarModalTrabajo()">&times;</button>
+            <h2 id="modalTrabajoTitulo"></h2>
+            <span class="modal-tag" id="modalTrabajoTag"></span>
+            <div class="modal-media" id="modalTrabajoMedia"></div>
+            <p class="modal-desc" id="modalTrabajoDesc"></p>
+        </div>
+    </div>
+
+    <script>
+        let datos = null;
+        let servicios = [];
+        let menuItems = [];
+        let categoriasServicios = [];
+
+        async function cargarDatos() {
+            try {
+                const localData = localStorage.getItem('datos_bergesio');
+                if (localData) {
+                    try {
+                        const parsed = JSON.parse(localData);
+                        if (parsed) {
+                            datos = parsed;
+                            servicios = parsed.servicios || [];
+                            menuItems = parsed.menu || ["Inicio", "Servicios", "Tienda", "Contacto"];
+                            categoriasServicios = parsed.categorias_servicios || [];
+                            renderizarPagina();
+                            return;
+                        }
+                    } catch (e) {}
+                }
+
+                try {
+                    const respuesta = await fetch('datos.json');
+                    if (respuesta.ok) {
+                        datos = await respuesta.json();
+                        servicios = datos.servicios || [];
+                        menuItems = datos.menu || ["Inicio", "Servicios", "Tienda", "Contacto"];
+                        categoriasServicios = datos.categorias_servicios || [];
+                        localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+                        renderizarPagina();
+                        return;
+                    }
+                } catch (e) {}
+
+                datos = {
+                    config: { nombre_sitio: "Metal Mecánica Bergesio", logo: "🔧" },
+                    menu: ["Inicio", "Servicios", "Tienda", "Contacto"],
+                    categorias_servicios: ["Carrozados", "Mantenimiento", "Soldaduras", "Tornería"],
+                    servicios: [
+                        { id: 1, titulo: "Carrozado de Camión", categoria: "Carrozados", descripcion: "Fabricación de carrocería completa...", tipo: "imagen", imagen: "", color: "#3b9eff" },
+                        { id: 2, titulo: "Mantenimiento Industrial", categoria: "Mantenimiento", descripcion: "Mantenimiento preventivo...", tipo: "imagen", imagen: "", color: "#a78bfa" },
+                        { id: 3, titulo: "Soldadura Estructural", categoria: "Soldaduras", descripcion: "Soldadura MIG y TIG...", tipo: "video", imagen: "", color: "#f472b6" },
+                        { id: 4, titulo: "Tornería de Precisión", categoria: "Tornería", descripcion: "Fabricación de piezas a medida...", tipo: "imagen", imagen: "", color: "#34d399" }
+                    ],
+                    footer: {
+                        texto: "© 2026 Metal Mecánica Bergesio · Calidad y experiencia",
+                        redes: [
+                            { nombre: "Facebook", url: "https://www.facebook.com/profile.php?id=100063636831085", icono: "fab fa-facebook" },
+                            { nombre: "WhatsApp", url: "#", icono: "fab fa-whatsapp" },
+                            { nombre: "Instagram", url: "#", icono: "fab fa-instagram" }
+                        ]
+                    }
+                };
+                servicios = datos.servicios || [];
+                menuItems = datos.menu || ["Inicio", "Servicios", "Tienda", "Contacto"];
+                categoriasServicios = datos.categorias_servicios || [];
+                localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+                renderizarPagina();
+
+            } catch (error) {
+                console.error('Error:', error);
+                renderizarPagina();
+            }
+        }
+
+        function renderizarPagina() {
+            if (!datos) {
+                datos = {
+                    config: { nombre_sitio: "Metal Mecánica Bergesio", logo: "🔧" },
+                    menu: ["Inicio", "Servicios", "Tienda", "Contacto"],
+                    servicios: [],
+                    footer: { texto: "", redes: [] }
+                };
+                localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+            }
+
+            const config = datos.config || {};
+            const footer = datos.footer || {};
+
+            document.title = `${config.nombre_sitio || 'Metal Mecánica Bergesio'} · Servicios`;
+
+            const menuHtml = menuItems.map(item => {
+                const isActive = item === 'Servicios' ? 'active' : '';
+                const link = item.toLowerCase() === 'inicio' ? 'index.html' : 
+                           item.toLowerCase() === 'servicios' ? 'servicios.html' :
+                           item.toLowerCase() === 'tienda' ? 'tienda.html' :
+                           item.toLowerCase() === 'contacto' ? 'contacto.html' :
+                           `${item.toLowerCase()}.html`;
+                return `<a href="${link}" class="${isActive}">${item}</a>`;
+            }).join('');
+
+            const content = document.getElementById('appContent');
+
+            const categorias = [...new Set(servicios.map(s => s.categoria).filter(c => c))];
+
+            content.innerHTML = `
+                <header class="header">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-icon">${config.logo || '🔧'}</span>
+                            <span>${config.nombre_sitio || 'Metal Mecánica Bergesio'}</span>
+                        </a>
+                    </div>
+                    <div class="nav-links">
+                        ${menuHtml}
+                    </div>
+                    <a href="contacto.html" class="btn-outline">Contacto</a>
+                </header>
+
+                <div class="page-header">
+                    <h1>Nuestros Servicios</h1>
+                    <p>Soluciones completas en metalmecánica para la industria y el transporte</p>
+                </div>
+
+                <div class="portfolio-filters" id="filterContainer">
+                    <button class="active" data-filter="todos">Todos</button>
+                    ${categorias.map(cat => `
+                        <button data-filter="${cat}">${cat}</button>
+                    `).join('')}
+                </div>
+
+                <div class="portfolio-grid" id="portfolioGrid"></div>
+
+                <footer class="footer">
+                    <span>${footer.texto || '© 2026 Metal Mecánica Bergesio'}</span>
+                    <div class="footer-social">
+                        ${(footer.redes || []).map(red => `
+                            <a href="${red.url || '#'}" target="_blank"><i class="${red.icono || 'fab fa-facebook'}"></i></a>
+                        `).join('')}
+                    </div>
+                </footer>
+            `;
+
+            renderizarServicios('todos');
+            configurarFiltros();
+        }
+
+        function renderizarServicios(filter = 'todos') {
+            const grid = document.getElementById('portfolioGrid');
+            const filtered = filter === 'todos' 
+                ? servicios 
+                : servicios.filter(s => s.categoria === filter);
+
+            if (!filtered.length) {
+                grid.innerHTML = `
+                    <div style="text-align:center; padding:40px; color:#4a5a7a; grid-column:1/-1;">
+                        <i class="fas fa-box-open" style="font-size:2rem; display:block; margin-bottom:10px;"></i>
+                        <p>No hay servicios en esta categoría.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => {
+                let mediaContent;
+                
+                // Detectar si es YouTube
+                const esYouTube = item.imagen && (
+                    item.imagen.includes('youtube.com/watch') || 
+                    item.imagen.includes('youtu.be/')
+                );
+                
+                if (item.tipo === 'video' && esYouTube) {
+                    let videoId = '';
+                    if (item.imagen.includes('youtu.be/')) {
+                        videoId = item.imagen.split('youtu.be/')[1].split('?')[0];
+                    } else if (item.imagen.includes('youtube.com/watch')) {
+                        videoId = new URLSearchParams(item.imagen.split('?')[1]).get('v');
+                    }
+                    mediaContent = `
+                        <div style="position:relative; padding-bottom:56.25%; height:0; width:100%;">
+                            <iframe src="https://www.youtube.com/embed/${videoId}" 
+                                    style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    `;
+                } else if (item.imagen && item.imagen.includes('drive.google.com')) {
+                    // Si es Google Drive, usar la URL convertida
+                    mediaContent = `<img src="${item.imagen}" alt="${item.titulo}" style="width:100%;height:100%;object-fit:cover;">`;
+                } else if (item.tipo === 'video' && item.imagen) {
+                    mediaContent = `
+                        <video controls style="width:100%;height:100%;object-fit:cover;">
+                            <source src="${item.imagen}" type="video/mp4">
+                            Tu navegador no soporta video.
+                        </video>
+                    `;
+                } else if (item.imagen) {
+                    mediaContent = `<img src="${item.imagen}" alt="${item.titulo}" style="width:100%;height:100%;object-fit:cover;">`;
+                } else {
+                    mediaContent = `
+                        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:${item.color}22;">
+                            <i class="fas fa-${item.tipo === 'video' ? 'play-circle' : 'image'}" style="font-size:3rem;color:${item.color};opacity:0.5;"></i>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="portfolio-item">
+                        <div class="media-container">${mediaContent}</div>
+                        <div class="info">
+                            <span class="tag">${item.categoria}</span>
+                            <h3>${item.titulo}</h3>
+                            <p>${item.descripcion || 'Sin descripción'}</p>
+                            <button class="btn-demo" onclick="abrirModalTrabajo(${item.id})">
+                                <i class="fas fa-eye"></i> Ver trabajo
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function configurarFiltros() {
+            document.querySelectorAll('.portfolio-filters button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.portfolio-filters button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderizarServicios(btn.dataset.filter);
+                });
+            });
+        }
+
+        function abrirModalTrabajo(id) {
+            const item = servicios.find(s => s.id === id);
+            if (!item) return;
+
+            document.getElementById('modalTrabajoTitulo').textContent = item.titulo;
+            document.getElementById('modalTrabajoTag').textContent = item.categoria || 'Sin categoría';
+            document.getElementById('modalTrabajoDesc').textContent = item.descripcion || 'Sin descripción';
+
+            const mediaContainer = document.getElementById('modalTrabajoMedia');
+            
+            // Detectar si es YouTube
+            const esYouTube = item.imagen && (
+                item.imagen.includes('youtube.com/watch') || 
+                item.imagen.includes('youtu.be/')
+            );
+            
+            if (esYouTube) {
+                let videoId = '';
+                if (item.imagen.includes('youtu.be/')) {
+                    videoId = item.imagen.split('youtu.be/')[1].split('?')[0];
+                } else if (item.imagen.includes('youtube.com/watch')) {
+                    videoId = new URLSearchParams(item.imagen.split('?')[1]).get('v');
+                }
+                mediaContainer.innerHTML = `
+                    <div style="position:relative; padding-bottom:56.25%; height:0; width:100%;">
+                        <iframe src="https://www.youtube.com/embed/${videoId}" 
+                                style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                `;
+            } else if (item.imagen) {
+                if (item.tipo === 'video') {
+                    mediaContainer.innerHTML = `
+                        <video controls autoplay style="width:100%;max-height:400px;object-fit:contain;">
+                            <source src="${item.imagen}" type="video/mp4">
+                            Tu navegador no soporta video.
+                        </video>
+                    `;
+                } else {
+                    mediaContainer.innerHTML = `<img src="${item.imagen}" alt="${item.titulo}" style="width:100%;max-height:400px;object-fit:contain;">`;
+                }
+            } else {
+                mediaContainer.innerHTML = `
+                    <div style="padding:40px; text-align:center; color:#4a5a7a;">
+                        <i class="fas fa-${item.tipo === 'video' ? 'play-circle' : 'image'}" style="font-size:4rem;color:${item.color};opacity:0.3;"></i>
+                        <p style="margin-top:10px;">Sin imagen o video disponible</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('modalTrabajo').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModalTrabajo() {
+            document.getElementById('modalTrabajo').classList.remove('active');
+            document.body.style.overflow = '';
+            const videos = document.querySelectorAll('#modalTrabajoMedia video');
+            videos.forEach(v => v.pause());
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                cerrarModalTrabajo();
+            }
+        });
+
+        document.getElementById('modalTrabajo').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarModalTrabajo();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', cargarDatos);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Mecánica Bergesio · Tienda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0c0f15;
+            color: #f0f4ff;
+            overflow-x: hidden;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0b1120, #1a1f2e, #0f1a2b);
+            background-size: 400% 400%;
+            animation: gradientFlow 18s ease infinite;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(0, 180, 255, 0.1);
+            animation: floatParticle linear infinite alternate;
+        }
+        .particle:nth-child(1) { width: 180px; height: 180px; top: 5%; left: 2%; animation-duration: 22s; }
+        .particle:nth-child(2) { width: 250px; height: 250px; bottom: 8%; right: 3%; animation-duration: 28s; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 120px; height: 120px; top: 25%; right: 15%; animation-duration: 18s; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 300px; height: 300px; bottom: 30%; left: -5%; animation-duration: 32s; animation-delay: 0.5s; }
+        .particle:nth-child(5) { width: 140px; height: 140px; top: 70%; left: 20%; animation-duration: 20s; animation-delay: 3s; }
+        .particle:nth-child(6) { width: 200px; height: 200px; top: 10%; left: 60%; animation-duration: 26s; animation-delay: 1.5s; }
+
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.4; }
+            25% { transform: translate(40px, -30px) scale(1.2) rotate(5deg); opacity: 0.7; }
+            50% { transform: translate(-20px, 50px) scale(0.9) rotate(-3deg); opacity: 0.5; }
+            75% { transform: translate(30px, 20px) scale(1.1) rotate(4deg); opacity: 0.8; }
+            100% { transform: translate(-40px, -40px) scale(1) rotate(0deg); opacity: 0.4; }
+        }
+
+        .content {
+            position: relative;
+            z-index: 5;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.8rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            margin-bottom: 4rem;
+            animation: slideDown 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.3s ease;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        .header:hover {
+            border-color: rgba(0, 180, 255, 0.3);
+            box-shadow: 0 20px 45px rgba(0, 100, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+        }
+        .logo a {
+            color: #f0f4ff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo .logo-icon {
+            color: #3b9eff;
+            font-size: 2rem;
+            animation: pulseIcon 2.4s ease-in-out infinite;
+        }
+        @keyframes pulseIcon {
+            0% { transform: scale(1) rotate(0deg); text-shadow: 0 0 0 #3b9eff; }
+            50% { transform: scale(1.2) rotate(8deg); text-shadow: 0 0 20px #3b9eff; }
+            100% { transform: scale(1) rotate(0deg); text-shadow: 0 0 0 #3b9eff; }
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: #b0c7e7;
+            text-decoration: none;
+            transition: 0.25s;
+            position: relative;
+            padding: 0.3rem 0;
+        }
+        .nav-links a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #3b9eff;
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a.active {
+            color: #fff;
+        }
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent;
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            background: #3b9eff;
+            border-color: #3b9eff;
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(59, 158, 255, 0.3);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0f4ff, #8bb4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: #94a9d1;
+            font-size: 1.2rem;
+        }
+
+        .shop-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+        }
+        .shop-search {
+            flex: 1 1 280px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 40px;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+        }
+        .shop-search:focus-within {
+            border-color: #3b9eff;
+            box-shadow: 0 0 20px rgba(59, 158, 255, 0.1);
+        }
+        .shop-search i { color: #6a80aa; font-size: 0.9rem; }
+        .shop-search input {
+            background: transparent;
+            border: none;
+            color: #f0f4ff;
+            padding: 0.6rem 0;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+        }
+        .shop-search input::placeholder { color: #4a5a7a; }
+        .shop-filters {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a9d1;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .filter-btn:hover {
+            border-color: rgba(59, 158, 255, 0.3);
+            color: #f0f4ff;
+        }
+        .filter-btn.active {
+            background: rgba(59, 158, 255, 0.15);
+            border-color: #3b9eff;
+            color: #f0f4ff;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .shop-item {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 24px;
+            padding: 2rem 1.8rem;
+            transition: 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        .shop-item:hover {
+            transform: translateY(-12px);
+            border-color: rgba(59, 158, 255, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 40, 100, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .shop-item .pdf-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.8rem;
+            animation: pdfPulse 3s ease-in-out infinite;
+        }
+        .shop-item .pdf-icon.color-1 { color: #f472b6; }
+        .shop-item .pdf-icon.color-2 { color: #3b9eff; }
+        .shop-item .pdf-icon.color-3 { color: #34d399; }
+        .shop-item .pdf-icon.color-4 { color: #a78bfa; }
+        .shop-item .pdf-icon.color-5 { color: #f59e0b; }
+        .shop-item .pdf-icon.color-6 { color: #ef4444; }
+        @keyframes pdfPulse {
+            0% { transform: scale(1) rotate(-2deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+            100% { transform: scale(1) rotate(-2deg); }
+        }
+        .shop-item .pdf-badge {
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        .shop-item .pdf-badge.badge-1 { color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.2); background: rgba(244, 114, 182, 0.1); }
+        .shop-item .pdf-badge.badge-2 { color: #3b9eff; border: 1px solid rgba(59, 158, 255, 0.2); background: rgba(59, 158, 255, 0.1); }
+        .shop-item .pdf-badge.badge-3 { color: #34d399; border: 1px solid rgba(52, 211, 153, 0.2); background: rgba(52, 211, 153, 0.1); }
+        .shop-item .pdf-badge.badge-4 { color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.2); background: rgba(167, 139, 250, 0.1); }
+        .shop-item .pdf-badge.badge-5 { color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); background: rgba(245, 158, 11, 0.1); }
+        .shop-item .pdf-badge.badge-6 { color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.1); }
+        .shop-item h4 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+        .shop-item .description { color: #94a9d1; font-size: 0.85rem; margin-bottom: 0.5rem; flex-grow: 1; }
+        .shop-item .features {
+            color: #b0c7e7;
+            font-size: 0.8rem;
+            margin: 0.4rem 0 0.8rem;
+            line-height: 1.8;
+            width: 100%;
+            text-align: left;
+        }
+        .shop-item .features i { margin-right: 6px; font-size: 0.7rem; }
+        .shop-item .features i.fa-check-circle { color: #34d399; }
+        .shop-item .features i.fa-file-pdf { color: #f472b6; }
+
+        .shop-item .price {
+            color: #f0f4ff;
+            font-weight: 700;
+            font-size: 1.6rem;
+            margin: 0.3rem 0;
+        }
+        .shop-item .price span { font-size: 0.8rem; font-weight: 400; color: #6a80aa; }
+
+        .shop-item .btn-buy {
+            margin-top: 0.8rem;
+            padding: 0.6rem 2rem;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #3b9eff, #7c6af0);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+        }
+        .shop-item .btn-buy:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(59, 158, 255, 0.4);
+        }
+        .shop-item .btn-buy i { font-size: 0.8rem; color: #fff; animation: none; }
+
+        .shop-item .btn-pdf {
+            margin-top: 0.8rem;
+            padding: 0.6rem 2rem;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #34d399, #059669);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+        }
+        .shop-item .btn-pdf:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(52, 211, 153, 0.4);
+        }
+        .shop-item .btn-pdf i { font-size: 0.8rem; color: #fff; animation: none; }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #6a80aa;
+            grid-column: 1 / -1;
+        }
+        .no-results i { font-size: 3rem; margin-bottom: 1rem; color: #4a5a7a; }
+
+        .shop-counter {
+            color: #6a80aa;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a9d1;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+        .pagination button:hover {
+            border-color: rgba(59, 158, 255, 0.3);
+            color: #f0f4ff;
+        }
+        .pagination button.active {
+            background: linear-gradient(135deg, #3b9eff, #7c6af0);
+            border-color: transparent;
+            color: #fff;
+        }
+        .pagination button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            color: #6a80aa;
+            font-size: 0.9rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+        .footer-social a {
+            color: #6a80aa;
+            text-decoration: none;
+            transition: 0.25s;
+            margin-left: 1.2rem;
+        }
+        .footer-social a:hover { color: #f0f4ff; }
+        .footer-social i { font-size: 1.4rem; transition: 0.25s; }
+        .footer-social a:hover i {
+            color: #f0f4ff;
+            transform: translateY(-4px) scale(1.1);
+            text-shadow: 0 0 15px #3b9eff;
+        }
+
+        @media (max-width: 800px) {
+            .header { flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+            .nav-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+            .page-header h1 { font-size: 2.2rem; }
+            .shop-toolbar { flex-direction: column; align-items: stretch; }
+            .shop-filters { justify-content: center; }
+            .shop-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animated"></div>
+    <div class="particles-container">
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <div class="content" id="appContent">
+        <div style="text-align:center; padding:50px; color:#4a5a7a;">
+            <i class="fas fa-spinner fa-spin" style="font-size:3rem;"></i>
+            <p style="margin-top:15px;">Cargando datos...</p>
+        </div>
+    </div>
+
+    <script>
+        let datos = null;
+        let productos = [];
+        let menuItems = [];
+        let categoriasProductos = [];
+        let currentPage = 1;
+        let currentFilter = 'todos';
+        let currentSearch = '';
+        const ITEMS_PER_PAGE = 12;
+
+        async function cargarDatos() {
+            try {
+                const localData = localStorage.getItem('datos_bergesio');
+                if (localData) {
+                    try {
+                        const parsed = JSON.parse(localData);
+                        if (parsed) {
+                            datos = parsed;
+                            productos = parsed.productos || [];
+                            menuItems = parsed.menu || ["Inicio", "Servicios", "Tienda", "Contacto"];
+                            categoriasProductos = parsed.categorias_productos || [];
+                            renderizarPagina();
+                            return;
+                        }
+                    } catch (e) {}
+                }
+
+                try {
+                    const respuesta = await fetch('datos.json');
+                    if (respuesta.ok) {
+                        datos = await respuesta.json();
+                        productos = datos.productos || [];
+                        menuItems = datos.menu || ["Inicio", "Servicios", "Tienda", "Contacto"];
+                        categoriasProductos = datos.categorias_productos || [];
+                        localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+                        renderizarPagina();
+                        return;
+                    }
+                } catch (e) {}
+
+                datos = {
+                    config: { nombre_sitio: "Metal Mecánica Bergesio", logo: "🔧" },
+                    menu: ["Inicio", "Servicios", "Tienda", "Contacto"],
+                    categorias_productos: ["Planos", "Manuales", "Guías", "Documentación"],
+                    productos: [],
+                    footer: { texto: "", redes: [] }
+                };
+                localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+                renderizarPagina();
+
+            } catch (error) {
+                console.error('Error:', error);
+                renderizarPagina();
+            }
+        }
+
+        function renderizarPagina() {
+            if (!datos) {
+                datos = {
+                    config: { nombre_sitio: "Metal Mecánica Bergesio", logo: "🔧" },
+                    menu: ["Inicio", "Servicios", "Tienda", "Contacto"],
+                    productos: [],
+                    footer: { texto: "", redes: [] }
+                };
+                localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+            }
+
+            const config = datos.config || {};
+            const footer = datos.footer || {};
+
+            document.title = `${config.nombre_sitio || 'Metal Mecánica Bergesio'} · Tienda`;
+
+            const categorias = [...new Set(productos.map(p => p.categoria).filter(c => c))];
+
+            const menuHtml = menuItems.map(item => {
+                const isActive = item === 'Tienda' ? 'active' : '';
+                const link = item.toLowerCase() === 'inicio' ? 'index.html' : 
+                           item.toLowerCase() === 'servicios' ? 'servicios.html' :
+                           item.toLowerCase() === 'tienda' ? 'tienda.html' :
+                           item.toLowerCase() === 'contacto' ? 'contacto.html' :
+                           `${item.toLowerCase()}.html`;
+                return `<a href="${link}" class="${isActive}">${item}</a>`;
+            }).join('');
+
+            const content = document.getElementById('appContent');
+
+            content.innerHTML = `
+                <header class="header">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-icon">${config.logo || '🔧'}</span>
+                            <span>${config.nombre_sitio || 'Metal Mecánica Bergesio'}</span>
+                        </a>
+                    </div>
+                    <div class="nav-links">
+                        ${menuHtml}
+                    </div>
+                    <a href="contacto.html" class="btn-outline">Contacto</a>
+                </header>
+
+                <div class="page-header">
+                    <h1>📚 Recursos Técnicos</h1>
+                    <p>Descarga guías, planos y recursos exclusivos para el sector metalmecánico</p>
+                </div>
+
+                <div class="shop-toolbar">
+                    <div class="shop-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar recursos..." oninput="aplicarBusqueda()">
+                    </div>
+                    <div class="shop-filters" id="filterContainer">
+                        <button class="filter-btn active" data-filter="todos" onclick="aplicarFiltro('todos')">Todos</button>
+                        ${categorias.map(cat => `
+                            <button class="filter-btn" data-filter="${cat}" onclick="aplicarFiltro('${cat}')">${cat}</button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="shop-grid" id="productGrid"></div>
+                <div class="shop-counter" id="productCounter"></div>
+                <div class="pagination" id="pagination"></div>
+
+                <footer class="footer">
+                    <span>${footer.texto || '© 2026 Metal Mecánica Bergesio'}</span>
+                    <div class="footer-social">
+                        ${(footer.redes || []).map(red => `
+                            <a href="${red.url || '#'}" target="_blank"><i class="${red.icono || 'fab fa-facebook'}"></i></a>
+                        `).join('')}
+                    </div>
+                </footer>
+            `;
+
+            renderizarProductos();
+        }
+
+        function filtrarProductos() {
+            let filtered = productos;
+
+            if (currentFilter !== 'todos') {
+                filtered = filtered.filter(p => p.categoria === currentFilter);
+            }
+
+            if (currentSearch.trim() !== '') {
+                const searchLower = currentSearch.toLowerCase().trim();
+                filtered = filtered.filter(p => 
+                    p.nombre.toLowerCase().includes(searchLower) ||
+                    p.descripcion.toLowerCase().includes(searchLower) ||
+                    p.categoria.toLowerCase().includes(searchLower)
+                );
+            }
+
+            return filtered;
+        }
+
+        function renderizarProductos() {
+            const filtered = filtrarProductos();
+            const totalItems = filtered.length;
+            const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+            if (currentPage > totalPages) currentPage = totalPages || 1;
+            if (currentPage < 1) currentPage = 1;
+
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const pageItems = filtered.slice(start, end);
+
+            const grid = document.getElementById('productGrid');
+            const counter = document.getElementById('productCounter');
+
+            if (pageItems.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>No encontramos recursos que coincidan con tu búsqueda</p>
+                    </div>
+                `;
+            } else {
+                grid.innerHTML = pageItems.map(p => {
+                    const colorNum = (p.id % 6) + 1;
+                    const esGratuito = p.gratuito || p.precio === 0;
+                    const precioTexto = esGratuito ? 'Gratis' : `$${p.precio} ARS`;
+                    
+                    return `
+                        <div class="shop-item">
+                            <i class="fas fa-file-pdf pdf-icon color-${colorNum}"></i>
+                            <span class="pdf-badge badge-${colorNum}">📄 ${p.paginas > 0 ? p.paginas + ' págs' : 'PDF'}</span>
+                            <h4>${p.nombre}</h4>
+                            <p class="description">${p.descripcion || 'Sin descripción'}</p>
+                            <div class="features">
+                                <div><i class="fas fa-${esGratuito ? 'check-circle' : 'tag'}"></i> ${esGratuito ? 'Gratuito' : 'Pago'}</div>
+                                <div><i class="fas fa-file-pdf"></i> Formato PDF</div>
+                                ${p.paginas > 0 ? `<div><i class="fas fa-file-alt"></i> ${p.paginas} páginas</div>` : ''}
+                                ${p.categoria ? `<div><i class="fas fa-folder"></i> ${p.categoria}</div>` : ''}
+                            </div>
+                            <div class="price">${precioTexto}</div>
+                            ${esGratuito && p.pdf_url ? 
+                                `<button class="btn-pdf" onclick="verPDF('${p.pdf_url}', '${p.nombre}')"><i class="fas fa-eye"></i> Ver PDF</button>` :
+                                (!esGratuito && p.link_pago ? 
+                                    `<a href="${p.link_pago}" target="_blank" class="btn-buy"><i class="fas fa-shopping-cart"></i> Comprar ahora</a>` :
+                                    `<span style="color:#4a5a7a; font-size:0.8rem;">Próximamente</span>`
+                                )
+                            }
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            counter.textContent = `Mostrando ${pageItems.length} de ${totalItems} recursos`;
+            renderizarPaginacion(totalPages);
+        }
+
+        function renderizarPaginacion(totalPages) {
+            const pagination = document.getElementById('pagination');
+            if (totalPages <= 1) { pagination.innerHTML = ''; return; }
+
+            let html = '';
+            html += `<button onclick="irPagina(${currentPage - 1})" ${currentPage <= 1 ? 'disabled' : ''}>
+                <i class="fas fa-chevron-left"></i>
+            </button>`;
+
+            const maxVisible = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+            if (endPage - startPage < maxVisible - 1) {
+                startPage = Math.max(1, endPage - maxVisible + 1);
+            }
+
+            if (startPage > 1) {
+                html += `<button onclick="irPagina(1)">1</button>`;
+                if (startPage > 2) html += `<button disabled>...</button>`;
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button onclick="irPagina(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) html += `<button disabled>...</button>`;
+                html += `<button onclick="irPagina(${totalPages})">${totalPages}</button>`;
+            }
+
+            html += `<button onclick="irPagina(${currentPage + 1})" ${currentPage >= totalPages ? 'disabled' : ''}>
+                <i class="fas fa-chevron-right"></i>
+            </button>`;
+
+            pagination.innerHTML = html;
+        }
+
+        function irPagina(page) {
+            const filtered = filtrarProductos();
+            const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderizarProductos();
+            document.getElementById('tienda').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function aplicarFiltro(filter) {
+            currentFilter = filter;
+            currentPage = 1;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            renderizarProductos();
+        }
+
+        function aplicarBusqueda() {
+            currentSearch = document.getElementById('searchInput').value;
+            currentPage = 1;
+            renderizarProductos();
+        }
+
+        function verPDF(url, nombre) {
+            window.open(url, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarDatos);
+    </script>
+
+</body>
+</html>

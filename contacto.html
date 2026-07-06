@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Mecánica Bergesio · Contacto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0c0f15;
+            color: #f0f4ff;
+            overflow-x: hidden;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0b1120, #1a1f2e, #0f1a2b);
+            background-size: 400% 400%;
+            animation: gradientFlow 18s ease infinite;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(0, 180, 255, 0.1);
+            animation: floatParticle linear infinite alternate;
+        }
+        .particle:nth-child(1) { width: 180px; height: 180px; top: 5%; left: 2%; animation-duration: 22s; }
+        .particle:nth-child(2) { width: 250px; height: 250px; bottom: 8%; right: 3%; animation-duration: 28s; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 120px; height: 120px; top: 25%; right: 15%; animation-duration: 18s; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 300px; height: 300px; bottom: 30%; left: -5%; animation-duration: 32s; animation-delay: 0.5s; }
+        .particle:nth-child(5) { width: 140px; height: 140px; top: 70%; left: 20%; animation-duration: 20s; animation-delay: 3s; }
+        .particle:nth-child(6) { width: 200px; height: 200px; top: 10%; left: 60%; animation-duration: 26s; animation-delay: 1.5s; }
+
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.4; }
+            25% { transform: translate(40px, -30px) scale(1.2) rotate(5deg); opacity: 0.7; }
+            50% { transform: translate(-20px, 50px) scale(0.9) rotate(-3deg); opacity: 0.5; }
+            75% { transform: translate(30px, 20px) scale(1.1) rotate(4deg); opacity: 0.8; }
+            100% { transform: translate(-40px, -40px) scale(1) rotate(0deg); opacity: 0.4; }
+        }
+
+        .content {
+            position: relative;
+            z-index: 5;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.8rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            margin-bottom: 4rem;
+            animation: slideDown 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.3s ease;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        .header:hover {
+            border-color: rgba(0, 180, 255, 0.3);
+            box-shadow: 0 20px 45px rgba(0, 100, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+        }
+        .logo a {
+            color: #f0f4ff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo .logo-icon {
+            color: #3b9eff;
+            font-size: 2rem;
+            animation: pulseIcon 2.4s ease-in-out infinite;
+        }
+        @keyframes pulseIcon {
+            0% { transform: scale(1) rotate(0deg); text-shadow: 0 0 0 #3b9eff; }
+            50% { transform: scale(1.2) rotate(8deg); text-shadow: 0 0 20px #3b9eff; }
+            100% { transform: scale(1) rotate(0deg); text-shadow: 0 0 0 #3b9eff; }
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: #b0c7e7;
+            text-decoration: none;
+            transition: 0.25s;
+            position: relative;
+            padding: 0.3rem 0;
+        }
+        .nav-links a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #3b9eff;
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a.active {
+            color: #fff;
+        }
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent;
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            background: #3b9eff;
+            border-color: #3b9eff;
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(59, 158, 255, 0.3);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0f4ff, #8bb4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: #94a9d1;
+            font-size: 1.2rem;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .contact-info {
+            flex: 1 1 320px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .contact-info h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .contact-info .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .contact-info .info-item:last-child { border-bottom: none; }
+        .contact-info .info-item i {
+            color: #3b9eff;
+            font-size: 1.3rem;
+            width: 30px;
+            text-align: center;
+        }
+        .contact-info .info-item .label { color: #6a80aa; font-size: 0.8rem; }
+        .contact-info .info-item .value { color: #f0f4ff; font-weight: 500; }
+
+        .contact-info .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .contact-info .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a9d1;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .contact-info .social-links a:hover {
+            background: rgba(59, 158, 255, 0.15);
+            border-color: #3b9eff;
+            color: #f0f4ff;
+            transform: translateY(-3px);
+        }
+
+        .faq-section {
+            flex: 1 1 400px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .faq-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .faq-section h3 i { color: #3b9eff; }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 0;
+        }
+        .faq-item:last-child { border-bottom: none; }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+            color: #f0f4ff;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .faq-question:hover { color: #3b9eff; }
+        .faq-question i {
+            transition: 0.3s;
+            color: #6a80aa;
+        }
+        .faq-question.active i {
+            transform: rotate(180deg);
+            color: #3b9eff;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            color: #94a9d1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding-left: 5px;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+            padding-bottom: 10px;
+        }
+
+        .map-section {
+            margin-top: 3rem;
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+        .map-section iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            display: block;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            color: #6a80aa;
+            font-size: 0.9rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+        .footer-social a {
+            color: #6a80aa;
+            text-decoration: none;
+            transition: 0.25s;
+            margin-left: 1.2rem;
+        }
+        .footer-social a:hover { color: #f0f4ff; }
+        .footer-social i { font-size: 1.4rem; transition: 0.25s; }
+        .footer-social a:hover i {
+            color: #f0f4ff;
+            transform: translateY(-4px) scale(1.1);
+            text-shadow: 0 0 15px #3b9eff;
+        }
+
+        @media (max-width: 800px) {
+            .header { flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+            .nav-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+            .page-header h1 { font-size: 2.2rem; }
+            .contact-info, .faq-section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animated"></div>
+    <div class="particles-container">
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <div class="content" id="appContent">
+        <div style="text-align:center; padding:50px; color:#4a5a7a;">
+            <i class="fas fa-spinner fa-spin" style="font-size:3rem;"></i>
+            <p style="margin-top:15px;">Cargando datos...</p>
+        </div>
+    </div>
+
+    <script>
+        let datos = null;
+        let menuItems = [];
+        let faqs = [];
+
+        async function cargarDatos() {
+            try {
+                const localData = localStorage.getItem('datos_bergesio');
+                if (localData) {
+                    try {
+                        const parsed = JSON.parse(localData);
+                        if (parsed) {
+                            datos = parsed;
+                            menuItems = parsed.menu || ["Inicio", "Servicios", "Tienda", "Contacto"];
+                            faqs = parsed.faqs || [];
+                            renderizarPagina();
+                            return;
+                        }
+                    } catch (e) {}
+                }
+
+                try {
+                    const respuesta = await fetch('datos.json');
+                    if (respuesta.ok) {
+                        datos = await respuesta.json();
+                        menuItems = datos.menu || ["Inicio", "Servicios", "Tienda", "Contacto"];
+                        faqs = datos.faqs || [];
+                        localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+                        renderizarPagina();
+                        return;
+                    }
+                } catch (e) {}
+
+                datos = {
+                    config: { nombre_sitio: "Metal Mecánica Bergesio", logo: "🔧" },
+                    menu: ["Inicio", "Servicios", "Tienda", "Contacto"],
+                    contacto: {
+                        email: "bergesiometalmecanica@gmail.com",
+                        telefono: "+54 9 11 1234-5678",
+                        direccion: "Avellaneda, Buenos Aires",
+                        horario_lunes_viernes: "8:00 - 18:00",
+                        horario_sabado: "8:00 - 13:00",
+                        sabado_activo: true,
+                        mapa_embed: "https://www.google.com/maps/embed?pb=..."
+                    },
+                    faqs: [],
+                    footer: { texto: "", redes: [] }
+                };
+                localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+                renderizarPagina();
+
+            } catch (error) {
+                console.error('Error:', error);
+                renderizarPagina();
+            }
+        }
+
+        function renderizarPagina() {
+            if (!datos) {
+                datos = {
+                    config: { nombre_sitio: "Metal Mecánica Bergesio", logo: "🔧" },
+                    menu: ["Inicio", "Servicios", "Tienda", "Contacto"],
+                    contacto: {},
+                    faqs: [],
+                    footer: { texto: "", redes: [] }
+                };
+                localStorage.setItem('datos_bergesio', JSON.stringify(datos));
+            }
+
+            const config = datos.config || {};
+            const contacto = datos.contacto || {};
+            const footer = datos.footer || {};
+
+            document.title = `${config.nombre_sitio || 'Metal Mecánica Bergesio'} · Contacto`;
+
+            const menuHtml = menuItems.map(item => {
+                const isActive = item === 'Contacto' ? 'active' : '';
+                const link = item.toLowerCase() === 'inicio' ? 'index.html' : 
+                           item.toLowerCase() === 'servicios' ? 'servicios.html' :
+                           item.toLowerCase() === 'tienda' ? 'tienda.html' :
+                           item.toLowerCase() === 'contacto' ? 'contacto.html' :
+                           `${item.toLowerCase()}.html`;
+                return `<a href="${link}" class="${isActive}">${item}</a>`;
+            }).join('');
+
+            const content = document.getElementById('appContent');
+
+            const horarioSab = contacto.sabado_activo ? contacto.horario_sabado || '8:00 - 13:00' : 'Cerrado';
+
+            content.innerHTML = `
+                <header class="header">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-icon">${config.logo || '🔧'}</span>
+                            <span>${config.nombre_sitio || 'Metal Mecánica Bergesio'}</span>
+                        </a>
+                    </div>
+                    <div class="nav-links">
+                        ${menuHtml}
+                    </div>
+                    <a href="contacto.html" class="btn-outline">Contacto</a>
+                </header>
+
+                <div class="page-header">
+                    <h1>📬 Contacto</h1>
+                    <p>¿Necesitás un presupuesto o tenés alguna consulta? ¡Contactanos!</p>
+                </div>
+
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h3>Información</h3>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <div class="label">Email</div>
+                                <div class="value">${contacto.email || 'bergesiometalmecanica@gmail.com'}</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <div class="label">Teléfono</div>
+                                <div class="value">${contacto.telefono || '+54 9 11 1234-5678'}</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <div class="label">Dirección</div>
+                                <div class="value">${contacto.direccion || 'Avellaneda, Buenos Aires, Argentina'}</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <div class="label">Horario</div>
+                                <div class="value">
+                                    <div>Lun - Vie: ${contacto.horario_lunes_viernes || '8:00 - 18:00'}</div>
+                                    <div>${contacto.sabado_activo ? `Sábados: ${horarioSab}` : 'Sábados: Cerrado'}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            ${(footer.redes || []).map(red => `
+                                <a href="${red.url || '#'}" target="_blank"><i class="${red.icono || 'fab fa-facebook'}"></i></a>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="faq-section">
+                        <h3><i class="fas fa-question-circle"></i> Preguntas Frecuentes</h3>
+                        <div id="faqsContainer">
+                            ${faqs.length === 0 ? '<p style="color:#4a5a7a;">No hay preguntas frecuentes aún.</p>' : ''}
+                            ${faqs.map(f => `
+                                <div class="faq-item">
+                                    <div class="faq-question" onclick="toggleFaq(this)">
+                                        ${f.pregunta}
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                    <div class="faq-answer">${f.respuesta}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-section">
+                    <iframe 
+                        src="${contacto.mapa_embed || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10499.417653603175!2d-58.382853!3d-34.660634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb8c5ed4ce53%3A0x4a30cc1fc1dd1d0!2sAvellaneda%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000'}" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                </div>
+
+                <footer class="footer">
+                    <span>${footer.texto || '© 2026 Metal Mecánica Bergesio · Calidad y experiencia'}</span>
+                    <div class="footer-social">
+                        ${(footer.redes || []).map(red => `
+                            <a href="${red.url || '#'}" target="_blank"><i class="${red.icono || 'fab fa-facebook'}"></i></a>
+                        `).join('')}
+                    </div>
+                </footer>
+            `;
+        }
+
+        function toggleFaq(el) {
+            const answer = el.nextElementSibling;
+            const isOpen = answer.classList.contains('open');
+            
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+            document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+            
+            if (!isOpen) {
+                answer.classList.add('open');
+                el.classList.add('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarDatos);
+    </script>
+
+</body>
+</html>

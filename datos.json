@@ -1,0 +1,207 @@
+{
+  "config": {
+    "nombre_sitio": "Metal Mecánica Bergesio",
+    "logo": "🔧",
+    "color_principal": "#3b9eff",
+    "favicon": "🔧"
+  },
+  "menu": ["Inicio", "Servicios", "Tienda", "Contacto"],
+  "categorias_servicios": ["Carrozados", "Mantenimiento", "Soldaduras", "Tornería", "Fabricación"],
+  "categorias_productos": ["Planos", "Manuales", "Guías Técnicas", "Documentación", "Catálogos"],
+  "pagina_inicio": {
+    "badge": "🔥 Especialistas en carrozados",
+    "titulo": "Carrozados de camiones y mantenimiento industrial",
+    "titulo_destacado": "camiones, mantenimiento industrial",
+    "colores_destacados": {
+      "camiones": "#f59e0b",
+      "mantenimiento industrial": "#34d399"
+    },
+    "descripcion": "Mantenimiento industrial, tornería, soldaduras en general, fabricación y reparaciones. Más de 15 años de experiencia brindando soluciones en metalmecánica.",
+    "boton_principal": "Solicitar presupuesto",
+    "boton_secundario": "Ver servicios",
+    "stats": [
+      { "numero": "+15", "label": "Años de experiencia" },
+      { "numero": "+500", "label": "Trabajos realizados" },
+      { "numero": "98%", "label": "Clientes satisfechos" },
+      { "numero": "24/7", "label": "Atención y asesoramiento" }
+    ],
+    "testimonios": [
+      {
+        "nombre": "Carlos Rodríguez",
+        "cargo": "Transportista",
+        "texto": "Excelente trabajo en el carrozado de mi camión. Quedó como nuevo y con una estructura más resistente.",
+        "estrellas": 5,
+        "avatar": "C"
+      },
+      {
+        "nombre": "Marta Fernández",
+        "cargo": "Gerente de Planta Industrial",
+        "texto": "El mantenimiento preventivo que realizan es impecable. Nuestra maquinaria nunca había funcionado tan bien.",
+        "estrellas": 5,
+        "avatar": "M"
+      },
+      {
+        "nombre": "Juan Pérez",
+        "cargo": "Dueño de Taller Mecánico",
+        "texto": "La soldadura que hicieron en nuestras estructuras es de la mejor calidad. Llevamos años trabajando juntos.",
+        "estrellas": 4,
+        "avatar": "J"
+      }
+    ]
+  },
+  "servicios": [
+    {
+      "id": 1,
+      "titulo": "Carrozado de Camión",
+      "categoria": "Carrozados",
+      "descripcion": "Fabricación de carrocería completa para camión de carga con estructura reforzada. Trabajamos con materiales de primera calidad y técnicas de soldadura profesional.",
+      "tipo": "imagen",
+      "imagen": "",
+      "color": "#3b9eff"
+    },
+    {
+      "id": 2,
+      "titulo": "Mantenimiento Industrial",
+      "categoria": "Mantenimiento",
+      "descripcion": "Mantenimiento preventivo y correctivo de maquinaria pesada para industria. Realizamos diagnósticos precisos y reparaciones de emergencia.",
+      "tipo": "imagen",
+      "imagen": "",
+      "color": "#a78bfa"
+    },
+    {
+      "id": 3,
+      "titulo": "Soldadura Estructural",
+      "categoria": "Soldaduras",
+      "descripcion": "Soldadura MIG y TIG para estructuras metálicas de alta resistencia. Contamos con soldadores calificados y equipos de última generación.",
+      "tipo": "video",
+      "imagen": "",
+      "color": "#f472b6"
+    },
+    {
+      "id": 4,
+      "titulo": "Tornería de Precisión",
+      "categoria": "Tornería",
+      "descripcion": "Fabricación de piezas a medida con tornería de alta precisión. Mecanizado de metales, rectificados, roscados y piezas especiales según plano.",
+      "tipo": "imagen",
+      "imagen": "",
+      "color": "#34d399"
+    },
+    {
+      "id": 5,
+      "titulo": "Fabricación de Estructuras",
+      "categoria": "Fabricación",
+      "descripcion": "Fabricación de estructuras metálicas para galpones, naves industriales y todo tipo de construcciones. Proyectos llave en mano.",
+      "tipo": "imagen",
+      "imagen": "",
+      "color": "#f59e0b"
+    }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Manual de Carrozados (GRATIS)",
+      "categoria": "Manuales",
+      "descripcion": "Guía completa sobre fabricación y reparación de carrocerías para camiones. Incluye técnicas de soldadura y materiales recomendados.",
+      "precio": 0,
+      "gratuito": true,
+      "pdf_url": "",
+      "link_pago": "",
+      "id_backend": "",
+      "paginas": 180
+    },
+    {
+      "id": 2,
+      "nombre": "Planos de Estructura Metálica",
+      "categoria": "Planos",
+      "descripcion": "Planos completos en PDF para la fabricación de estructuras metálicas para galpones y naves industriales.",
+      "precio": 15000,
+      "gratuito": false,
+      "pdf_url": "",
+      "link_pago": "https://link.mercadopago.com.ar/tu-link-aqui",
+      "id_backend": "plano-estructura",
+      "paginas": 0
+    },
+    {
+      "id": 3,
+      "nombre": "Guía de Mantenimiento Industrial",
+      "categoria": "Guías Técnicas",
+      "descripcion": "Manual de mantenimiento preventivo y correctivo para maquinaria industrial. Incluye checklist y procedimientos recomendados.",
+      "precio": 0,
+      "gratuito": true,
+      "pdf_url": "",
+      "link_pago": "",
+      "id_backend": "",
+      "paginas": 120
+    },
+    {
+      "id": 4,
+      "nombre": "Plano Mueble Industrial",
+      "categoria": "Planos",
+      "descripcion": "Diseño detallado de mueble industrial en PDF. Incluye medidas, materiales y planos de despiece.",
+      "precio": 12000,
+      "gratuito": false,
+      "pdf_url": "",
+      "link_pago": "https://link.mercadopago.com.ar/tu-link-aqui",
+      "id_backend": "plano-mueble",
+      "paginas": 0
+    },
+    {
+      "id": 5,
+      "nombre": "Técnicas de Soldadura MIG",
+      "categoria": "Documentación",
+      "descripcion": "Documento técnico sobre técnicas de soldadura MIG para estructuras metálicas. Incluye parámetros y recomendaciones de seguridad.",
+      "precio": 0,
+      "gratuito": true,
+      "pdf_url": "",
+      "link_pago": "",
+      "id_backend": "",
+      "paginas": 0
+    },
+    {
+      "id": 6,
+      "nombre": "Plano Taller Mecánico",
+      "categoria": "Planos",
+      "descripcion": "Planos completos para la construcción de un taller mecánico. Incluye distribución de espacios y planos estructurales.",
+      "precio": 18000,
+      "gratuito": false,
+      "pdf_url": "",
+      "link_pago": "https://link.mercadopago.com.ar/tu-link-aqui",
+      "id_backend": "plano-taller",
+      "paginas": 0
+    }
+  ],
+  "contacto": {
+    "email": "bergesiometalmecanica@gmail.com",
+    "telefono": "+54 9 11 1234-5678",
+    "direccion": "Avellaneda, Buenos Aires, Argentina",
+    "horario_lunes_viernes": "8:00 - 18:00",
+    "horario_sabado": "8:00 - 13:00",
+    "sabado_activo": true,
+    "mapa_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1283.2891835621442!2d-59.648334443528086!3d-29.110338276116135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x944eba730d522473%3A0xf73aad570ce1412d!2sMetalmecanica%20BERGESIO!5e1!3m2!1ses-419!2sar!4v1783295788555!5m2!1ses-419!2sar"
+  },
+  "faqs": [
+    {
+      "id": 1,
+      "pregunta": "¿Hacen presupuestos sin compromiso?",
+      "respuesta": "Sí, realizamos presupuestos sin cargo y sin compromiso. Solo necesitamos conocer los detalles del trabajo para poder cotizarlo correctamente."
+    },
+    {
+      "id": 2,
+      "pregunta": "¿Cuánto tiempo tarda un carrozado?",
+      "respuesta": "El tiempo depende de la complejidad del trabajo. Generalmente entre 2 y 4 semanas, pero te daremos un plazo exacto en el presupuesto."
+    },
+    {
+      "id": 3,
+      "pregunta": "¿Trabajan con seguros o en garantía?",
+      "respuesta": "Sí, todos nuestros trabajos tienen garantía por escrito. Además trabajamos con la mayoría de las compañías de seguros para reparaciones."
+    }
+  ],
+  "footer": {
+    "texto": "© 2026 Metal Mecánica Bergesio · Calidad y experiencia en metalmecánica",
+    "redes": [
+      { "nombre": "Facebook", "url": "https://www.facebook.com/profile.php?id=100063636831085", "icono": "fab fa-facebook" },
+      { "nombre": "WhatsApp", "url": "#", "icono": "fab fa-whatsapp" },
+      { "nombre": "Instagram", "url": "#", "icono": "fab fa-instagram" }
+    ]
+  }
+}
